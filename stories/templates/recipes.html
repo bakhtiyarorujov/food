@@ -25,6 +25,7 @@
         <div class="row">
             <div class="col-lg-9">
                 <div class="row">
+                    {% for recipe in recipes %}
                     <div class="col-md-6 col-lg-12 ftco-animate">
                         <div class="blog-entry d-lg-flex">
                             <div class="half">
@@ -34,10 +35,10 @@
                                 </a>
                             </div>
                             <div class="text px-md-4 px-lg-5 half pt-3">
-                                <p class="meta d-flex"><span class="pr-3">Category</span><span class="ml-auto pl-3">12.10.2020</span>
+                                <p class="meta d-flex"><span class="pr-3">{{ recipe.category }}</span><span class="ml-auto pl-3">{{ recipe.created_at }}</span>
                                 </p>
                                 <h3><a href="single.html">Title</a></h3>
-                                <p>Description
+                                <p>{{ recipe.content }}
                                 </p>
                                 <p class="mb-0">
                                     <a href="" class="btn btn-primary">Like</a>
@@ -46,112 +47,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 col-lg-12 ftco-animate">
-                        <div class="blog-entry d-lg-flex">
-                            <div class="half">
-                                <a href="single.html" class="img d-flex align-items-end"
-                                   style="background-image: url({% static 'images/image_2.jpg'%});">
-                                    <div class="overlay"></div>
-                                </a>
-                            </div>
-                            <div class="text px-md-4 px-lg-5 half pt-3">
-                                <p class="meta d-flex"><span class="pr-3">Category</span><span class="ml-auto pl-3">12.10.2020</span>
-                                </p>
-                                <h3><a href="single.html">Title</a></h3>
-                                <p>Description
-                                </p>
-                                <p class="mb-0">
-                                    <a href="" class="btn btn-primary">Like</a>
-                                    <a href="single.html" class="btn btn-primary">Read More <span
-                                        class="icon-arrow_forward ml-4"></span></a></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-12 ftco-animate">
-                        <div class="blog-entry d-lg-flex">
-                            <div class="half">
-                                <a href="single.html" class="img d-flex align-items-end"
-                                   style="background-image: url({% static 'images/image_3.jpg'%});">
-                                    <div class="overlay"></div>
-                                </a>
-                            </div>
-                            <div class="text px-md-4 px-lg-5 half pt-3">
-                                <p class="meta d-flex"><span class="pr-3">Category</span><span class="ml-auto pl-3">12.10.2020</span>
-                                </p>
-                                <h3><a href="single.html">Title</a></h3>
-                                <p>Description
-                                </p>
-                                <p class="mb-0">
-                                    <a href="" class="btn btn-primary">Like</a>
-                                    <a href="single.html" class="btn btn-primary">Read More <span
-                                        class="icon-arrow_forward ml-4"></span></a></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-12 ftco-animate">
-                        <div class="blog-entry d-lg-flex">
-                            <div class="half">
-                                <a href="single.html" class="img d-flex align-items-end"
-                                   style="background-image: url({% static 'images/image_4.jpg'%});">
-                                    <div class="overlay"></div>
-                                </a>
-                            </div>
-                            <div class="text px-md-4 px-lg-5 half pt-3">
-                                <p class="meta d-flex"><span class="pr-3">Category</span><span class="ml-auto pl-3">12.10.2020</span>
-                                </p>
-                                <h3><a href="single.html">Title</a></h3>
-                                <p>Description
-                                </p>
-                                <p class="mb-0">
-                                    <a href="" class="btn btn-primary">Like</a>
-                                    <a href="single.html" class="btn btn-primary">Read More <span
-                                        class="icon-arrow_forward ml-4"></span></a></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-12 ftco-animate">
-                        <div class="blog-entry d-lg-flex">
-                            <div class="half">
-                                <a href="single.html" class="img d-flex align-items-end"
-                                   style="background-image: url({% static 'images/image_5.jpg'%});">
-                                    <div class="overlay"></div>
-                                </a>
-                            </div>
-                            <div class="text px-md-4 px-lg-5 half pt-3">
-                                <p class="meta d-flex"><span class="pr-3">Category</span><span class="ml-auto pl-3">12.10.2020</span>
-                                </p>
-                                <h3><a href="single.html">Title</a></h3>
-                                <p>Description
-                                </p>
-                                <p class="mb-0">
-                                    <a href="" class="btn btn-primary">Like</a>
-                                    <a href="single.html" class="btn btn-primary">Read More <span
-                                        class="icon-arrow_forward ml-4"></span></a></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-12 ftco-animate">
-                        <div class="blog-entry d-lg-flex">
-                            <div class="half">
-                                <a href="single.html" class="img d-flex align-items-end"
-                                   style="background-image: url({% static 'images/image_6.jpg'%});">
-                                    <div class="overlay"></div>
-                                </a>
-                            </div>
-                            <div class="text px-md-4 px-lg-5 half pt-3">
-                                <p class="meta d-flex"><span class="pr-3">Category</span><span class="ml-auto pl-3">12.10.2020</span>
-                                </p>
-                                <h3><a href="single.html">Title</a></h3>
-                                <p>Description
-                                </p>
-                                <p class="mb-0">
-                                    <a href="" class="btn btn-primary">Like</a>
-                                    <a href="single.html" class="btn btn-primary">Read More <span
-                                        class="icon-arrow_forward ml-4"></span></a></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    {% endfor %}
                 <div class="row mt-5">
                     <div class="col text-center">
                         <div class="block-27">

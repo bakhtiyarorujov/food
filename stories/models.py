@@ -18,7 +18,7 @@ class Receipe(TimeStamp):
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='receipes')
     category = models.ForeignKey('Category', on_delete=models.CASCADE, related_name='receipes')
     tags = models.ManyToManyField('Tag', related_name='receipes')
-
+    
     def __str__(self) -> str:
         return self.title
 

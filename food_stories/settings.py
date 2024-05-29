@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'core',
     'accounts',
     'stories',
+    'psycopg'
 ]
 
 MIDDLEWARE = [
@@ -78,8 +79,12 @@ WSGI_APPLICATION = 'food_stories.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'FoodDB',
+        'USER': 'food_user',
+        'PASSWORD': 'pass12345',
+        'HOST': 'localhost',
+        'PORT': 5434
     }
 }
 
