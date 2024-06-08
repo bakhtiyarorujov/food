@@ -17,6 +17,7 @@ class Receipe(TimeStamp):
     content = models.TextField('Content')
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='receipes')
     category = models.ForeignKey('Category', on_delete=models.CASCADE, related_name='receipes')
+    cover = models.ImageField(upload_to='recipe_cover', null=True, blank=True)
     tags = models.ManyToManyField('Tag', related_name='receipes')
     
     def __str__(self) -> str:
@@ -25,6 +26,7 @@ class Receipe(TimeStamp):
 
 class Category(TimeStamp):
     name = models.CharField('Name', max_length=100)
+    cover = models.ImageField(upload_to='category_cover', null=True, blank=True)
     parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True)
 
     class Meta:
