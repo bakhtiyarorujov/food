@@ -140,3 +140,14 @@ MEDIA_ROOT = BASE_DIR / 'media'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL= 'accounts.User'
+
+from django.contrib.messages import constants as message_constants
+
+MESSAGE_TAGS = {
+     message_constants.DEBUG: 'alert-secondary', 
+     message_constants.INFO: 'alert-info',
+     message_constants.SUCCESS: 'alert-success',
+     message_constants.WARNING: 'alert-warning',
+     message_constants.ERROR: 'alert-error',
+
+}
