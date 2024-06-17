@@ -41,7 +41,7 @@
                                 <p>{{ recipe.content|truncatewords:10 }}
                                 </p>
                                 <p class="mb-0">
-                                    <a href={% url 'single_receipe' recipe.id%} class="btn btn-primary">Like</a>
+                                    <a href={% url 'like' recipe.id%} class="btn btn-primary">Like</a>
                                     <a href={% url 'single_receipe' recipe.id%} class="btn btn-primary">Read More <span
                                         class="icon-arrow_forward ml-4"></span></a></p>
                             </div>
