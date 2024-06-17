@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'core',
     'accounts',
     'stories',
-    'psycopg'
+    'psycopg',
+    'social_django',
 ]
 
 MIDDLEWARE = [
@@ -52,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'food_stories.urls'
@@ -74,6 +76,19 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'food_stories.wsgi.application'
 
+
+AUTHENTICATION_BACKENDS = [
+    'social_core.backends.facebook.FacebookOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+]
+
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_URL = 'logout'
+LOGOUT_REDIRECT_URL = 'login'
+
+SOCIAL_AUTH_FACEBOOK_KEY = 1113176829978715        # App ID
+SOCIAL_AUTH_FACEBOOK_SECRET = '65f97ff7ddea6caae8c58ea272a7d380'  # App Secret
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
@@ -151,3 +166,11 @@ MESSAGE_TAGS = {
      message_constants.ERROR: 'alert-error',
 
 }
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'bakhtiyarorujov@gmail.com'
+EMAIL_HOST_PASSWORD = 'khqc sukd xckz pzjw'
+EMAIL_USE_TLS = True
