@@ -23,6 +23,19 @@ class Receipe(TimeStamp):
     def __str__(self) -> str:
         return self.title
 
+    class Meta:
+        ordering = ['-created_at']
+
+
+class RecipeComment(TimeStamp):
+    recipe = models.ForeignKey(Receipe, on_delete=models.CASCADE, related_name='comments')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comments')
+    content = models.TextField()
+    parent = models.ForeignKey('self', on_delete=models.CASCADE, related_name='replies', null=True, blank=True)
+
+    def __str__(self) -> str:
+        return f'{self.user} {self.recipe}'
+
 
 class Category(TimeStamp):
     name = models.CharField('Name', max_length=100)
