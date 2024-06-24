@@ -6,6 +6,7 @@ cryptography==42.0.8
 defusedxml==0.8.0rc2
 Django==5.0.6
 django-jazzmin==3.0.0
+Faker==25.9.1
 idna==3.7
 oauthlib==3.2.2
 pillow==10.3.0
@@ -13,6 +14,7 @@ psycopg==3.1.19
 psycopg-binary==3.1.19
 pycparser==2.22
 PyJWT==2.8.0
+python-dateutil==2.9.0.post0
 python3-openid==3.2.0
 requests==2.32.3
 requests-oauthlib==2.0.0

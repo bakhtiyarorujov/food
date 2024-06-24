@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
+from django.urls import reverse_lazy
 # Create your models here.
 User = get_user_model()
 
@@ -19,9 +20,14 @@ class Receipe(TimeStamp):
     category = models.ForeignKey('Category', on_delete=models.CASCADE, related_name='receipes')
     cover = models.ImageField(upload_to='recipe_cover', null=True, blank=True)
     tags = models.ManyToManyField('Tag', related_name='receipes')
+    slug = models.SlugField(null=True, blank=True)
     
     def __str__(self) -> str:
         return self.title
+
+    def get_absolute_url(self):
+        return reverse_lazy("single_receipe", kwargs={"slug": self.slug})
+    
 
     class Meta:
         ordering = ['-created_at']

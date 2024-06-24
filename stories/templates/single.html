@@ -29,7 +29,7 @@
                 <div class="tag-widget post-tag-container mb-5 mt-5">
                     <div class="tagcloud">
                         {% for tag in recipe.tags.all %}
-                        <a href="#" class="tag-cloud-link">{{tag.name}}</a>
+                        <a href="{% url 'receipes' %}?tag={{ tag.id }}" class="tag-cloud-link">{{tag.name}}</a>
                         {% endfor %}
                     </div>
                 </div>
@@ -95,7 +95,7 @@
                         <h3 class="heading mb-4">Categories</h3>
                         {% get_categories 7 as categories %}
                         {% for category in categories %}
-                        <li><a href="#">{{ category.name }} <span>({{ category.receipes.count }})</span></a></li>
+                        <li><a href="{% url 'receipes' %}?category={{ category.id }}">{{ category.name }} <span>({{ category.receipes.count }})</span></a></li>
                         {% endfor %}
                     </ul>
                 </div>

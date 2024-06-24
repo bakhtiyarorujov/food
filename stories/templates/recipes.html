@@ -29,7 +29,7 @@
                     <div class="col-md-6 col-lg-12 ftco-animate">
                         <div class="blog-entry d-lg-flex">
                             <div class="half">
-                                <a href={% url 'single_receipe' recipe.id%} class="img d-flex align-items-end"
+                                <a href={{ recipe.get_absolute_url }} class="img d-flex align-items-end"
                                    style="background-image: url({{ recipe.cover.url }});">
                                     <div class="overlay"></div>
                                 </a>

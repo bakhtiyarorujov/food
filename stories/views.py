@@ -1,10 +1,12 @@
 from typing import Any
+from django.db.models.query import QuerySet
 from django.shortcuts import render, get_object_or_404, HttpResponse
 from .models import Receipe, Tag
-from django.views.generic import ListView, DetailView
-from .forms import CommenttForm
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from .forms import CommenttForm, RecipeCreateForm
 from django.views.generic.edit import FormMixin
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 # def receipes(request):
@@ -21,8 +23,17 @@ class RecipeListView(ListView):
    model = Receipe
    context_object_name = 'recipes'
    ordering = ['created_at']
-   paginate_by = 2
+   paginate_by = 3
 
+   def get_queryset(self) -> QuerySet[Any]:
+      queryset = super().get_queryset()
+      cat_id = self.request.GET.get('category')
+      tag_id = self.request.GET.get('tag')
+      if cat_id:
+         queryset = Receipe.objects.filter(category__id=cat_id)
+      if tag_id:
+         queryset = Receipe.objects.filter(tags__id=tag_id)
+      return queryset
 
 def like_post(request, id):
    # request.session['liked_posts'] = request.session.get('liked_posts', '') + str(id) + ' '
@@ -73,3 +84,18 @@ class RecipeDetailView(DetailView, FormMixin):
 def stories(request):
    return render(request, 'stories.html')
 
+
+class RecipeCreateView(LoginRequiredMixin, CreateView):
+   template_name = 'create_recipe.html'
+   form_class = RecipeCreateForm
+   # success_url = reverse_lazy('home')
+
+   def form_valid(self, form):
+       form.instance.author = self.request.user
+       return super().form_valid(form)
+   
+
+class RecipeUpdateView(LoginRequiredMixin, UpdateView):
+   template_name = 'create_recipe.html'
+   form_class = RecipeCreateForm
+   model = Receipe
