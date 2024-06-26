@@ -1,3 +1,4 @@
+{% load i18n %}
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark ftco-navbar-light" id="ftco-navbar">
     <div class="container">
         <a class="navbar-brand" href="index.html">Stories<span>.</span></a>
@@ -7,11 +8,27 @@
 
         <div class="collapse navbar-collapse" id="ftco-nav">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item active"><a href="{% url 'home' %}" class="nav-link">Home</a></li>
-                <li class="nav-item"><a href="{% url 'about_us' %}" class="nav-link">About</a></li>
-                <li class="nav-item"><a href="{% url 'stories' %}" class="nav-link">Stories</a></li>
-                <li class="nav-item"><a href="{% url 'receipes' %}" class="nav-link">Recipes</a></li>
-                <li class="nav-item"><a href="{% url 'contact_us' %}" class="nav-link">Contact</a></li>
+                <li class="nav-item active"><a href="{% url 'home' %}" class="nav-link">{% trans 'Home' %}</a></li>
+                <li class="nav-item"><a href="{% url 'about_us' %}" class="nav-link">{% trans 'About' %}</a></li>
+                <li class="nav-item"><a href="{% url 'stories' %}" class="nav-link">{% trans 'Stories' %}</a></li>
+                <li class="nav-item"><a href="{% url 'receipes' %}" class="nav-link">{% trans 'Recipes' %}</a></li>
+                <li class="nav-item"><a href="{% url 'contact_us' %}" class="nav-link">{% trans 'Contact' %}</a></li>
+                <li>
+                    <form action="{% url 'set_language' %}" method="post">  {#2#}
+                        {% csrf_token %}  {#3#}
+                        <select name="language">  {#4#}
+                            {% get_current_language as LANGUAGE_CODE %}  {#5#}
+                            {% get_available_languages as LANGUAGES %}  {#6#}
+                            {% get_language_info_list for LANGUAGES as languages %}  {#7#}
+                            {% for language in languages %}
+                                <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>  {#8#}
+                                    {{ language.name_local }} ({{ language.code }})
+                                </option>
+                            {% endfor %}
+                        </select>
+                        <input type="submit" value="Switch">  {#9#}
+                    </form>
+                </li>
                 {% if request.user.is_authenticated %}
                 <li><a href="{% url 'logout' %}" class="btn btn-black px-3 px-md-4 py-3">Log out</a></li>
                 {% else %}
