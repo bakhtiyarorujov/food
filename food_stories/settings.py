@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'stories',
     'psycopg',
     'social_django',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [

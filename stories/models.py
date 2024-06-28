@@ -28,6 +28,8 @@ class Receipe(TimeStamp):
     def get_absolute_url(self):
         return reverse_lazy("single_receipe", kwargs={"slug": self.slug})
     
+    def author_name(self):
+        return self.author.get_full_name()
 
     class Meta:
         ordering = ['-created_at']
