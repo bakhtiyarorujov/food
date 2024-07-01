@@ -19,8 +19,8 @@ class TagSerialzier(serializers.ModelSerializer):
 
 class RecipeSerialzier(serializers.ModelSerializer):
     # category = serializers.CharField(source='category.name')
-    # category = CategorySerialzier()
-    # tags = TagSerialzier(many=True)
+    category = CategorySerialzier()
+    tags = TagSerialzier(many=True)
     class Meta:
         model = Receipe
         fields = (
@@ -49,6 +49,7 @@ class RecipeSerialzier(serializers.ModelSerializer):
 
 
 class RecipeCreateSerialzier(serializers.ModelSerializer):
+    author = serializers.PrimaryKeyRelatedField(read_only=True)
     class Meta:
         model = Receipe
         fields = (
@@ -59,8 +60,8 @@ class RecipeCreateSerialzier(serializers.ModelSerializer):
             'cover',
             'tags'
         )
-    def create(self, validated_data):
-        tag_data = validated_data.pop('tags')
-        recipe = Receipe.objects.create(**validated_data)
-        recipe.tags.set(tag_data)
-        return recipe
+
+    def validate(self, attrs):
+        data = super().validate(attrs)
+        data['author'] = self.context['request'].user
+        return data

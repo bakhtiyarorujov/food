@@ -11,3 +11,5 @@ class User(AbstractUser):
             return self.profile_photo.url
         else:
             return '/static/images/p.png'
+        
+    
