@@ -14,6 +14,21 @@ class UserProfileSerialzier(serializers.ModelSerializer):
             'username'
         )
 
+class UserTokenSerialzier(serializers.ModelSerializer):
+    refresh = serializers.CharField()
+    access = serializers.CharField()
+    class Meta:
+        model = User
+        fields = (
+            'refresh',
+            'access',
+            'id',
+            'first_name',
+            'last_name',
+            'username'
+        )
+
+
 class UserTokenObtainSerialzier(TokenObtainPairSerializer):
 
     def validate(self, attrs: Dict[str, Any]) -> Dict[str, str]:

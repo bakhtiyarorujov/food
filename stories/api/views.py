@@ -5,6 +5,8 @@ from rest_framework.decorators import api_view
 from django.shortcuts import get_object_or_404
 from rest_framework.generics import ListAPIView, CreateAPIView, ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.permissions import AllowAny, IsAuthenticated
+from drf_yasg.utils import swagger_auto_schema
+from drf_yasg import openapi
 
 def categories(request):
     category_list = Category.objects.all()
@@ -51,6 +53,9 @@ def recipe_update(request, id):
     
 
 class RecipeListView(ListCreateAPIView):
+    """
+    This endpoint is for list and create
+    """
     serializer_class = RecipeCreateSerialzier
     permission_classes = [IsAuthenticated]
     queryset = Receipe.objects.all()
@@ -60,10 +65,19 @@ class RecipeListView(ListCreateAPIView):
             return RecipeSerialzier
         return super().get_serializer_class()
 
-    # def get_permissions(self):
-    #     if self.request.method == "POST":
-    #         return [IsAuthenticated]
-    #     return super().get_permissions()
+
+    def get_queryset(self):
+        keyword = self.request.GET.get('keyword')
+        if keyword:
+            queryset = Receipe.objects.filter(title__icontains = keyword)
+            return queryset
+        return super().get_queryset()
+    
+    @swagger_auto_schema(manual_parameters=[
+        openapi.Parameter('keyword', openapi.IN_QUERY, description="keyword to filter name", type=openapi.TYPE_STRING)
+    ])
+    def get(self, request, *args, **kwargs):
+        return super().get(request, *args, **kwargs)
     
 
 class RecipeRetriveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
