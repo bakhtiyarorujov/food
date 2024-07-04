@@ -1,6 +1,6 @@
-from stories.models import Category, Receipe
+from stories.models import Category, Receipe, Tag
 from django.http import JsonResponse
-from .serializers import CategorySerialzier, RecipeSerialzier, RecipeCreateSerialzier
+from .serializers import CategorySerialzier, RecipeSerialzier, RecipeCreateSerialzier, TagListSerializer
 from rest_framework.decorators import api_view
 from django.shortcuts import get_object_or_404
 from rest_framework.generics import ListAPIView, CreateAPIView, ListCreateAPIView, RetrieveUpdateDestroyAPIView
@@ -57,7 +57,7 @@ class RecipeListView(ListCreateAPIView):
     This endpoint is for list and create
     """
     serializer_class = RecipeCreateSerialzier
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
     queryset = Receipe.objects.all()
 
     def get_serializer_class(self):
@@ -82,10 +82,15 @@ class RecipeListView(ListCreateAPIView):
 
 class RecipeRetriveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
     serializer_class = RecipeCreateSerialzier
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
     queryset = Receipe.objects.all()
 
     def get_serializer_class(self):
         if self.request.method == "GET":
             return RecipeSerialzier
         return super().get_serializer_class()
+
+class TagListView(ListAPIView):
+    serializer_class = TagListSerializer
+    permission_classes = [AllowAny]
+    queryset = Tag.objects.all()

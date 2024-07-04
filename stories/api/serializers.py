@@ -65,3 +65,11 @@ class RecipeCreateSerialzier(serializers.ModelSerializer):
         data = super().validate(attrs)
         data['author'] = self.context['request'].user
         return data
+
+class TagListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Tag
+        fields = (
+            'id',
+            'name'
+        )
