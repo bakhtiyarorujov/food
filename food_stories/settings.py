@@ -94,6 +94,7 @@ SIMPLE_JWT = {
 }
 
 AUTHENTICATION_BACKENDS = [
+    'social_core.backends.linkedin.LinkedinOAuth2',
     'social_core.backends.facebook.FacebookOAuth2',
     'django.contrib.auth.backends.ModelBackend',
 ]
@@ -122,6 +123,9 @@ LOGOUT_REDIRECT_URL = 'login'
 
 SOCIAL_AUTH_FACEBOOK_KEY = 1113176829978715        # App ID
 SOCIAL_AUTH_FACEBOOK_SECRET = '65f97ff7ddea6caae8c58ea272a7d380'  # App Secret
+
+SOCIAL_AUTH_LINKEDIN_OAUTH2_KEY = "78xvd96cy2lgg2"         # Client ID
+SOCIAL_AUTH_LINKEDIN_OAUTH2_SECRET = "d4DRXVhx8fhZxAFA"  # Client Secret
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases

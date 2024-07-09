@@ -20,11 +20,12 @@ window.addEventListener('load', async function(event){
 let recipeCreateForm = document.querySelector('#recipeForm')
 recipeCreateForm.addEventListener('submit', function(event){
     event.preventDefault()
+    token = localStorage.getItem('token')
     let formData = new FormData(recipeCreateForm)
     let response = fetch("http://localhost:8000/api/recipes", {
         method: "POST",
         headers: {
-            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzIwMTEyMjM3LCJpYXQiOjE3MjAwMjU4MzcsImp0aSI6IjJkNmFkOTNmOGNhMjQ4MTBiMmJiYjBkZTlkMmVmN2QwIiwidXNlcl9pZCI6MX0.Dm_rffkrNBlrgufOpLDc6FDebjwnkpK9IsaO3MSovNw'
+            'Authorization': `Bearer ${token}`
         },
         body: formData
     })

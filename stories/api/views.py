@@ -57,7 +57,7 @@ class RecipeListView(ListCreateAPIView):
     This endpoint is for list and create
     """
     serializer_class = RecipeCreateSerialzier
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
     queryset = Receipe.objects.all()
 
     def get_serializer_class(self):
@@ -82,7 +82,7 @@ class RecipeListView(ListCreateAPIView):
 
 class RecipeRetriveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
     serializer_class = RecipeCreateSerialzier
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
     queryset = Receipe.objects.all()
 
     def get_serializer_class(self):
