@@ -13,6 +13,15 @@ services:
       POSTGRES_USER: food_user
       POSTGRES_DB: FoodDB
 
+  web:
+    container_name: food_stories
+    build: .
+    ports:
+      - 8002:8000
+    depends_on:
+      - db
+      - redis
+
   adminer:
     image: adminer
     restart: always
