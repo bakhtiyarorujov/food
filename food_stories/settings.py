@@ -137,7 +137,7 @@ DATABASES = {
         'NAME': 'FoodDB',
         'USER': 'food_user',
         'PASSWORD': 'pass12345',
-        'HOST': 'localhost',
+        'HOST': 'db',
         'PORT': 5432
     }
 }
@@ -226,5 +226,5 @@ EMAIL_HOST_USER = 'bakhtiyarorujov@gmail.com'
 EMAIL_HOST_PASSWORD = 'khqc sukd xckz pzjw'
 EMAIL_USE_TLS = True
 
-CELERY_BROKER_URL = f"redis://localhost:6379"
-CELERY_RESULT_BACKEND = f"redis://localhost:6379"
+CELERY_BROKER_URL = f"redis://redis:6379"
+CELERY_RESULT_BACKEND = f"redis://redis:6379"
