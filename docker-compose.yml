@@ -7,7 +7,7 @@ services:
     image: postgres
     restart: always
     ports:
-      - 5434:5432
+      - 5432:5432
     environment:
       POSTGRES_PASSWORD: pass12345
       POSTGRES_USER: food_user
@@ -21,7 +21,14 @@ services:
     depends_on:
       - db
       - redis
-
+    environment:
+      DEBUG: 'True'
+      POSTGRES_DB: FoodDB
+      POSTGRES_USER: food_user
+      POSTGRES_PASSWORD: pass12345
+      POSTGRES_HOST: 'db'
+      POSTGRES_PORT: 5432
+      REDIS_HOST: redis
   adminer:
     image: adminer
     restart: always

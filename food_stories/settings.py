@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 from datetime import timedelta
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-nx9vrc2vuyjy-3u0myt9mk$5c@-=c0!3m1zrfs_qr8$v_(0uz6'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False if os.environ.get("DEBUG") else True
 
 ALLOWED_HOSTS = ["*"]
 
@@ -134,11 +135,11 @@ SOCIAL_AUTH_LINKEDIN_OAUTH2_SECRET = "d4DRXVhx8fhZxAFA"  # Client Secret
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'FoodDB',
-        'USER': 'food_user',
-        'PASSWORD': 'pass12345',
-        'HOST': 'db',
-        'PORT': 5432
+        'NAME': os.environ.get("POSTGRES_DB", "FoodDB"),
+        'USER': os.environ.get("POSTGRES_USER", "food_user"),
+        'PASSWORD': os.environ.get("POSTGRES_PASSWORD", "pass12345"),
+        'HOST': os.environ.get("POSTGRES_HOST", 'localhost'),
+        'PORT': os.environ.get("POSTGRES_PORT", 5432)
     }
 }
 
@@ -191,10 +192,12 @@ LOCALE_PATHS = [
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
-
-STATICFILES_DIRS = [
-    BASE_DIR, 'static'
-]
+if DEBUG:
+    STATICFILES_DIRS = [
+        BASE_DIR, 'static'
+    ]
+else:
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
@@ -226,5 +229,5 @@ EMAIL_HOST_USER = 'bakhtiyarorujov@gmail.com'
 EMAIL_HOST_PASSWORD = 'khqc sukd xckz pzjw'
 EMAIL_USE_TLS = True
 
-CELERY_BROKER_URL = f"redis://redis:6379"
-CELERY_RESULT_BACKEND = f"redis://redis:6379"
+CELERY_BROKER_URL = f"redis://{os.environ.get('REDIS_HOST', 'localhost')}:6379"
+CELERY_RESULT_BACKEND = f"redis://{os.environ.get('REDIS_HOST', 'localhost')}:6379"
