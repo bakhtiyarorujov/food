@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     "corsheaders",
+    'django_celery_beat',
 ]
 
 MIDDLEWARE = [
@@ -137,7 +138,7 @@ DATABASES = {
         'USER': 'food_user',
         'PASSWORD': 'pass12345',
         'HOST': 'localhost',
-        'PORT': 5434
+        'PORT': 5432
     }
 }
 
@@ -224,3 +225,6 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'bakhtiyarorujov@gmail.com'
 EMAIL_HOST_PASSWORD = 'khqc sukd xckz pzjw'
 EMAIL_USE_TLS = True
+
+CELERY_BROKER_URL = f"redis://localhost:6379"
+CELERY_RESULT_BACKEND = f"redis://localhost:6379"
