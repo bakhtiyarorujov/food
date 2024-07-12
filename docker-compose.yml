@@ -13,22 +13,6 @@ services:
       POSTGRES_USER: food_user
       POSTGRES_DB: FoodDB
 
-  web:
-    container_name: food_stories
-    build: .
-    ports:
-      - 8002:8000
-    depends_on:
-      - db
-      - redis
-    environment:
-      DEBUG: 'True'
-      POSTGRES_DB: FoodDB
-      POSTGRES_USER: food_user
-      POSTGRES_PASSWORD: pass12345
-      POSTGRES_HOST: 'db'
-      POSTGRES_PORT: 5432
-      REDIS_HOST: redis
   adminer:
     image: adminer
     restart: always

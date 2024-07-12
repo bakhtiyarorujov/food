@@ -25,9 +25,10 @@ SECRET_KEY = 'django-insecure-nx9vrc2vuyjy-3u0myt9mk$5c@-=c0!3m1zrfs_qr8$v_(0uz6
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-DEBUG = True
+DEBUG = int(os.environ.get("DEBUG", default=1))
+PROD = not DEBUG
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -133,7 +134,8 @@ SOCIAL_AUTH_LINKEDIN_OAUTH2_SECRET = "d4DRXVhx8fhZxAFA"  # Client Secret
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-DATABASES = {
+if DEBUG:
+    DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': "FoodDB",
@@ -143,6 +145,17 @@ DATABASES = {
         'PORT': 5432
     }
 }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': os.environ.get("POSTGRES_DB", "FoodDB"),
+            'USER': os.environ.get("POSTGRES_USER", "food_user"),
+            'PASSWORD': os.environ.get("POSTGRES_PASSWORD", "pass12345"),
+            'HOST': os.environ.get("POSTGRES_HOST", 'localhost'),
+            'PORT': os.environ.get("POSTGRES_PORT", 5432)
+        }
+    }
 
 
 # Password validation
@@ -194,11 +207,12 @@ LOCALE_PATHS = [
 
 STATIC_URL = '/static/'
 
-
-STATICFILES_DIRS = [
-        BASE_DIR, 'static'
-    ]
-
+if DEBUG:
+    STATICFILES_DIRS = [
+            BASE_DIR, 'static'
+        ]
+else:
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
